@@ -15660,17 +15660,50 @@ var React = __webpack_require__(4);
 
 var About = function About(props) {
   return React.createElement(
-    'div',
+    "div",
     null,
     React.createElement(
-      'h3',
-      null,
-      'About'
+      "h1",
+      { className: "text-center" },
+      "About"
     ),
     React.createElement(
-      'p',
+      "p",
       null,
-      'Welcome to the about page.'
+      "This app was created in May 2017, by Clinton Baker, following a tutorial created by Andrew Mead."
+    ),
+    React.createElement(
+      "p",
+      null,
+      "This is a weather application built using React.js"
+    ),
+    React.createElement(
+      "p",
+      null,
+      "Some of the tools used:"
+    ),
+    React.createElement(
+      "ol",
+      null,
+      React.createElement(
+        "li",
+        null,
+        React.createElement(
+          "a",
+          { href: "https://facebook.github.io/react" },
+          "React.js"
+        )
+      ),
+      React.createElement(
+        "li",
+        null,
+        React.createElement(
+          "a",
+          { href: "http://openweathermap.org" },
+          "Open Weather map"
+        ),
+        " -- The API used for weather queries."
+      )
     )
   );
 };
@@ -15692,7 +15725,7 @@ var _require = __webpack_require__(89),
 var Examples = function Examples(props) {
   return React.createElement(
     'div',
-    { className: true },
+    null,
     React.createElement(
       'h1',
       { className: 'text-center' },
@@ -15711,8 +15744,17 @@ var Examples = function Examples(props) {
         null,
         React.createElement(
           Link,
+          { to: '/?location=SaltLakeCity' },
+          'Salt Lake City, UT'
+        )
+      ),
+      React.createElement(
+        'li',
+        null,
+        React.createElement(
+          Link,
           { to: '/?location=Boulder' },
-          'Bouler, CO'
+          'Boulder, CO'
         )
       ),
       React.createElement(
