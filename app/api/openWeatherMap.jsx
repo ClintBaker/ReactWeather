@@ -14,6 +14,8 @@ module.exports = {
       }
     }, (res) => {
       throw new Error('Unable to fetch weather for that location.');
+    }).catch((e) => {
+      throw new Error('Unable to fetch weather for that location.')
     });
   }
 }
