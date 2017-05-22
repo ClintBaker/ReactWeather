@@ -16121,7 +16121,7 @@ var Examples = function Examples(props) {
         null,
         React.createElement(
           Link,
-          { to: '/?location=SaltLakeCity' },
+          { to: '/?location=Salt Lake City' },
           'Salt Lake City, UT'
         )
       ),
@@ -16139,7 +16139,7 @@ var Examples = function Examples(props) {
         null,
         React.createElement(
           Link,
-          { to: '/?Rio' },
+          { to: '/?location=Rio' },
           'Rio, Brazil'
         )
       )
@@ -16196,7 +16196,14 @@ var Nav = React.createClass({
 
   onSearch: function onSearch(e) {
     e.preventDefault();
-    alert('Not yet wired up');
+
+    var location = this.refs.search.value;
+    var encodedLocation = encodeURIComponent(location);
+
+    if (location.length > 0) {
+      this.refs.search.value = '';
+      window.location.hash = '#/?location=' + encodedLocation;
+    }
   },
   render: function render() {
     return React.createElement(
@@ -16254,7 +16261,7 @@ var Nav = React.createClass({
             React.createElement(
               'li',
               null,
-              React.createElement('input', { type: 'search', placeholder: 'Search weather by city' })
+              React.createElement('input', { type: 'search', placeholder: 'Search weather by city', ref: 'search' })
             ),
             React.createElement(
               'li',
@@ -16292,7 +16299,9 @@ var Weather = React.createClass({
 
     this.setState({
       isLoading: true,
-      erroMessage: undefined
+      erroMessage: undefined,
+      location: undefined,
+      temp: undefined
     });
 
     openWeatherMap.getTemp(location).then(function (temp) {
@@ -16307,6 +16316,22 @@ var Weather = React.createClass({
         errorMessage: e.message
       });
     });
+  },
+  componentDidMount: function componentDidMount() {
+    var location = this.props.location.query.location;
+
+    if (location && location.length > 0) {
+      this.handleSearch(location);
+      window.location.hash = '#/';
+    }
+  },
+  componentWillReceiveProps: function componentWillReceiveProps(newProps) {
+    var location = newProps.location.query.location;
+
+    if (location && location.length > 0) {
+      this.handleSearch(location);
+      window.location.hash = '#/';
+    }
   },
   render: function render() {
     var _state = this.state,
